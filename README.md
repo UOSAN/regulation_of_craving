@@ -40,7 +40,7 @@ Trials are repeated 40 times, in the behavioral version, or 20 times, in the sca
 How much do you desire the
 item shown in the last picture?
 ```
-The rating scale has 1 labeled as `No Desire` and 4 labeled as `Strong Desire`.
+The rating scale has 1 labeled as `No Desire` and 5 labeled as `Strong Desire`.
 
 
 ## Configuration
