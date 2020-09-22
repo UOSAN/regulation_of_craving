@@ -45,10 +45,6 @@ The rating scale has 1 labeled as `No Desire` and 5 labeled as `Strong Desire`.
 
 ## Configuration
 
-The task is configured by a CSV file, `ROC_R<run_number><beh or scan>.csv`, i.e. `ROC_R1beh.csv` for the first run of the behavioral version or `ROC_R3scan.csv` for the third run of the scanner version. The CSV file must contain four columns: the duration in seconds the fixation cross is displayed (`jitter_duration`), the color of the border instructing look or regulate (`background_color`), the text to be displayed (`reappraise_or_look`), and the stimulus image to be displayed (`image_file`).
+The task is configured by a CSV file, `ROC_Session<session_number>.csv`, i.e. `ROC_Session1.csv` for the first session. The CSV file must contain four columns: the duration in seconds the fixation cross is displayed (`jitter_duration`), the color of the border instructing look or regulate (`background_color`), the text to be displayed (`reappraise_or_look`), and the stimulus image to be displayed (`image_file`).
 
 The location of the images is relative to the location of the `ROC.psyexp` task definition, and are currently stored in `Resources/`.
-
-## Developer documentation
-
-Developed with PsychoPy v2020.1.2
