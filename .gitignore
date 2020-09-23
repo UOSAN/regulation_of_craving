@@ -4,5 +4,8 @@
 # PsychoPy data folder
 data/
 
+# PsychoPy Javascript libraries
+html/lib
+
 # PyCharm configuration
 .idea/
