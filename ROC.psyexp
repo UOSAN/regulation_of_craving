@@ -215,15 +215,15 @@
         <Param name="pos" updates="constant" val="(0, -0.2)" valType="code"/>
         <Param name="saveStartStop" updates="None" val="True" valType="bool"/>
         <Param name="size" updates="constant" val="(1.0, 0.025)" valType="code"/>
-        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startEstim" updates="None" val="8" valType="code"/>
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
-        <Param name="startVal" updates="None" val="8" valType="code"/>
+        <Param name="startVal" updates="None" val="$jitter_duration+7" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="stopVal" updates="constant" val="4" valType="code"/>
         <Param name="storeHistory" updates="constant" val="False" valType="bool"/>
         <Param name="storeRating" updates="constant" val="True" valType="bool"/>
         <Param name="storeRatingTime" updates="constant" val="True" valType="bool"/>
-        <Param name="styles" updates="constant" val="['triangleMarker']" valType="fixedList"/>
+        <Param name="styles" updates="constant" val="('triangleMarker',)" valType="fixedList"/>
         <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
         <Param name="ticks" updates="constant" val="(1, 2, 3, 4, 5)" valType="list"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
@@ -237,9 +237,9 @@
         <Param name="forceEndRoutine" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="stim_keyboard" valType="code"/>
         <Param name="saveStartStop" updates="None" val="True" valType="bool"/>
-        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startEstim" updates="None" val="8" valType="code"/>
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
-        <Param name="startVal" updates="None" val="8" valType="code"/>
+        <Param name="startVal" updates="None" val="$jitter_duration+7" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="stopVal" updates="constant" val="4" valType="code"/>
         <Param name="store" updates="constant" val="last key" valType="str"/>

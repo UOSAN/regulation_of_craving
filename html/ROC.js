@@ -674,7 +674,7 @@ function trialRoutineEachFrame(snapshot) {
     
     
     // *stim_rating* updates
-    if (t >= 8 && stim_rating.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= (jitter_duration + 7) && stim_rating.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       stim_rating.tStart = t;  // (not accounting for frame time here)
       stim_rating.frameNStart = frameN;  // exact frame index
@@ -682,13 +682,13 @@ function trialRoutineEachFrame(snapshot) {
       stim_rating.setAutoDraw(true);
     }
 
-    frameRemains = 8 + 4 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = (jitter_duration + 7) + 4 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if ((stim_rating.status === PsychoJS.Status.STARTED || stim_rating.status === PsychoJS.Status.FINISHED) && t >= frameRemains) {
       stim_rating.setAutoDraw(false);
     }
     
     // *stim_keyboard* updates
-    if (t >= 8 && stim_keyboard.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= (jitter_duration + 7) && stim_keyboard.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       stim_keyboard.tStart = t;  // (not accounting for frame time here)
       stim_keyboard.frameNStart = frameN;  // exact frame index
@@ -699,7 +699,7 @@ function trialRoutineEachFrame(snapshot) {
       psychoJS.window.callOnFlip(function() { stim_keyboard.clearEvents(); });
     }
 
-    frameRemains = 8 + 4 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    frameRemains = (jitter_duration + 7) + 4 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
     if ((stim_keyboard.status === PsychoJS.Status.STARTED || stim_keyboard.status === PsychoJS.Status.FINISHED) && t >= frameRemains) {
       stim_keyboard.status = PsychoJS.Status.FINISHED;
   }
