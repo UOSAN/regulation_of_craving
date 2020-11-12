@@ -13,7 +13,7 @@ stimulus (5s), 1-5 rating (4s) => 12s/trial.
 1. Launch the PsychoPy Builder.
 2. Open the file `ROC.psyexp`.
 3. Start the experiment by selecting the Tools -> Run menu item
-4. Fill in the subject number, the session number, and the run number. Sessions 1 and 2 are in-scanners sessions, while sessions 3, 4, and 5 are behavioral sessions. Specifying run number of 0 will run a practice version of the task. The task will start automatically after that.
+4. Fill in the participant identifier and the run number. Runs 1 and 2 are in-scanner runs, while runs 3, 4, and 5 are behavioral runs. Specifying run number of 0 will run a practice version of the task. The task will start automatically after that.
 
 ## Task description
 
@@ -45,6 +45,6 @@ The rating scale has 1 labeled as `No Desire` and 5 labeled as `Strong Desire`.
 
 ## Configuration
 
-The task is configured by a CSV file, `ROC_Session<session_number>.csv`, i.e. `ROC_Session1.csv` for the first session. The CSV file must contain four columns: the duration in seconds the fixation cross is displayed (`jitter_duration`), the color of the border instructing look or regulate (`background_color`), the text to be displayed (`reappraise_or_look`), and the stimulus image to be displayed (`image_file`).
+The task is configured by a CSV file, `ROC_Session<run_number>.csv`, i.e. `ROC_Session1.csv` for the first run. The CSV file must contain four columns: the duration in seconds the fixation cross is displayed (`jitter_duration`), the color of the border instructing look or regulate (`background_color`), the text to be displayed (`reappraise_or_look`), and the stimulus image to be displayed (`image_file`).
 
 The location of the images is relative to the location of the `ROC.psyexp` task definition, and are currently stored in `Resources/`.
