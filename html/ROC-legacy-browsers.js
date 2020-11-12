@@ -17,7 +17,7 @@ psychoJS.openWindow({
 
 // store info about the experiment session:
 let expName = 'ROC';  // from the Builder filename that created this script
-let expInfo = {'participant': '999', 'session': '1', 'run_number': '1'};
+let expInfo = {'participant': '', 'run_number': '1'};
 
 // schedule the experiment:
 psychoJS.schedule(psychoJS.gui.DlgFromDict({
@@ -103,7 +103,7 @@ psychoJS.start({
 	],
   });
 
-psychoJS.experimentLogger.setLevel(core.Logger.ServerLevel.EXP);
+psychoJS.experimentLogger.setLevel(core.Logger.ServerLevel.DEBUG);
 
 
 var frameDur;
@@ -131,12 +131,9 @@ var setupClock;
 var window_width;
 var window_height;
 var participant;
-var session;
 var run_number;
-var session_type;
 var start_text_str;
 var conditions_file;
-var continueRoutine;
 var instructionsClock;
 var start_text;
 var start_trigger;
@@ -163,20 +160,13 @@ function experimentInit() {
       return ((session === "1") || (session === "2"));
   }
   participant = expInfo["participant"];
-  session = expInfo["session"];
   run_number = expInfo["run_number"];
-  if (is_mri_session(session)) {
-      session_type = "scan";
+  if (is_mri_session(run_number)) {
       start_text_str = "Calibrating scanner.\nPlease hold VERY still.";
   } else {
-      session_type = "beh";
       start_text_str = "The task is about to begin.\nGet ready!";
   }
-  conditions_file = (("ROC_Session" + session.toString()) + ".csv");
-  if ((run_number === "0")) {
-      conditions_file = "ROC_practice.csv";
-      continueRoutine = false;
-  }
+  conditions_file = (("ROC_Session" + run_number.toString()) + ".csv");
   
   // Initialize components for Routine "instructions"
   instructionsClock = new util.Clock();
@@ -311,6 +301,7 @@ function setupRoutineBegin(snapshot) {
 }
 
 
+var continueRoutine;
 function setupRoutineEachFrame(snapshot) {
   return function () {
     //------Loop for each frame of Routine 'setup'-------
