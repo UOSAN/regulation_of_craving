@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2020.2.5">
+<PsychoPy2experiment encoding="utf-8" version="2020.2.10">
   <Settings>
     <Param name="Audio latency priority" updates="None" val="use prefs" valType="str"/>
     <Param name="Audio lib" updates="None" val="use prefs" valType="str"/>
@@ -7,7 +7,7 @@
     <Param name="Data file delimiter" updates="None" val="auto" valType="str"/>
     <Param name="Data filename" updates="None" val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code"/>
     <Param name="Enable Escape" updates="None" val="True" valType="bool"/>
-    <Param name="Experiment info" updates="None" val="{'participant': '', 'run_number': '1'}" valType="code"/>
+    <Param name="Experiment info" updates="None" val="{'participant': '', 'session': '', 'run_number': '1'}" valType="code"/>
     <Param name="Force stereo" updates="None" val="True" valType="bool"/>
     <Param name="Full-screen window" updates="None" val="True" valType="bool"/>
     <Param name="HTML path" updates="None" val="html" valType="str"/>
@@ -187,11 +187,11 @@
         <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin JS Routine" updates="constant" val="stim_rating.depth = (- 30);&amp;#10;" valType="extendedCode"/>
-        <Param name="Begin Routine" updates="constant" val="# Set depth explicitly to workaround https://github.com/psychopy/psychopy/issues/3154&amp;#10;# Slider component not rendered in routine order&amp;#10;stim_rating.depth = -30" valType="extendedCode"/>
+        <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Auto-&gt;JS" valType="str"/>
-        <Param name="Each Frame" updates="constant" val="# Update marker position and slider rating&amp;#10;# when there are keypresses of the 1, 2, 3, 4, 5 buttons&amp;#10;rating_keys = ['1', '2', '3', '4', '5']&amp;#10;if stim_keyboard.keys in rating_keys:&amp;#10;    stim_rating.markerPos = int(stim_keyboard.keys)&amp;#10;    # confirm rating by setting to current markerPos&amp;#10;    stim_rating.rating = stim_rating.markerPos&amp;#10;" valType="extendedCode"/>
-        <Param name="Each JS Frame" updates="constant" val="var _pj;&amp;#10;function _pj_snippets(container) {&amp;#10;    function in_es6(left, right) {&amp;#10;        if (((right instanceof Array) || ((typeof right) === &quot;string&quot;))) {&amp;#10;            return (right.indexOf(left) &gt; (- 1));&amp;#10;        } else {&amp;#10;            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {&amp;#10;                return right.has(left);&amp;#10;            } else {&amp;#10;                return (left in right);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;    container[&quot;in_es6&quot;] = in_es6;&amp;#10;    return container;&amp;#10;}&amp;#10;_pj = {};&amp;#10;_pj_snippets(_pj);&amp;#10;rating_keys = [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;];&amp;#10;if (_pj.in_es6(stim_keyboard.keys, rating_keys)) {&amp;#10;    stim_rating.markerPos = Number.parseInt(stim_keyboard.keys);&amp;#10;    stim_rating.rating = stim_rating.markerPos;&amp;#10;}&amp;#10;" valType="extendedCode"/>
+        <Param name="Each Frame" updates="constant" val="# Update marker position and slider rating&amp;#10;# when there are keypresses of the rating buttons&amp;#10;r = convert_key_to_rating(expInfo['run_number'], stim_keyboard.keys)&amp;#10;stim_rating.markerPos = r&amp;#10;# confirm rating by setting to current markerPos&amp;#10;stim_rating.rating = r&amp;#10;" valType="extendedCode"/>
+        <Param name="Each JS Frame" updates="constant" val="r = convert_key_to_rating(expInfo[&quot;run_number&quot;], stim_keyboard.keys);&amp;#10;stim_rating.markerPos = r;&amp;#10;stim_rating.rating = r;&amp;#10;" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="End JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -223,13 +223,13 @@
         <Param name="storeHistory" updates="constant" val="False" valType="bool"/>
         <Param name="storeRating" updates="constant" val="True" valType="bool"/>
         <Param name="storeRatingTime" updates="constant" val="True" valType="bool"/>
-        <Param name="styles" updates="constant" val="('triangleMarker',)" valType="fixedList"/>
+        <Param name="styles" updates="constant" val="['triangleMarker']" valType="fixedList"/>
         <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
         <Param name="ticks" updates="constant" val="(1, 2, 3, 4, 5)" valType="list"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
       </SliderComponent>
       <KeyboardComponent name="stim_keyboard">
-        <Param name="allowedKeys" updates="constant" val="'1', '2', '3', '4', '5'" valType="code"/>
+        <Param name="allowedKeys" updates="constant" val="'5', '6', '7', '8', '9'" valType="code"/>
         <Param name="correctAns" updates="constant" val="" valType="str"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="discard previous" updates="constant" val="True" valType="bool"/>
@@ -336,10 +336,10 @@
         <Param name="name" updates="None" val="get_window_size" valType="code"/>
       </CodeComponent>
       <CodeComponent name="get_conditions_file">
-        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Experiment" updates="constant" val="&amp;#10;def is_mri_session(session: str) -&gt; bool:&amp;#10;    return session == '1' or session == '2'&amp;#10;&amp;#10;&amp;#10;participant = expInfo['participant']&amp;#10;run_number = expInfo['run_number']&amp;#10;&amp;#10;#&amp;#10;# Determine the input conditions file based on the session number.&amp;#10;# Run numbers 1 and 2 are in the MRI scanner.&amp;#10;# Run numbers 3, 4, and 5 are behavorial, not performed in the scanner.&amp;#10;# Run number 0 is a practice run that only has a couple of trials.&amp;#10;# Display different start text / instructions for behavioral sessions compared with MRI scan sessions.&amp;#10;if is_mri_session(run_number):&amp;#10;    start_text_str = 'Calibrating scanner.\nPlease hold VERY still.'&amp;#10;else:&amp;#10;    start_text_str = 'The task is about to begin.\nGet ready!'&amp;#10;conditions_file = 'ROC_Session' + str(run_number) + '.csv'&amp;#10;" valType="extendedCode"/>
-        <Param name="Begin JS Experiment" updates="constant" val="function is_mri_session(session) {&amp;#10;    return ((session === &quot;1&quot;) || (session === &quot;2&quot;));&amp;#10;}&amp;#10;participant = expInfo[&quot;participant&quot;];&amp;#10;run_number = expInfo[&quot;run_number&quot;];&amp;#10;if (is_mri_session(run_number)) {&amp;#10;    start_text_str = &quot;Calibrating scanner.\nPlease hold VERY still.&quot;;&amp;#10;} else {&amp;#10;    start_text_str = &quot;The task is about to begin.\nGet ready!&quot;;&amp;#10;}&amp;#10;conditions_file = ((&quot;ROC_Session&quot; + run_number.toString()) + &quot;.csv&quot;);&amp;#10;" valType="extendedCode"/>
+        <Param name="Before Experiment" updates="constant" val="rating_keys = ['5', '6', '7', '8', '9']&amp;#10;&amp;#10;&amp;#10;def convert_key_to_rating(run_number, key):&amp;#10;    rating = None&amp;#10;    if key in rating_keys:&amp;#10;        rating = int(key)&amp;#10;        if run_number != '0':&amp;#10;            rating = rating - 4&amp;#10;&amp;#10;    return rating" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="var _pj;&amp;#10;function _pj_snippets(container) {&amp;#10;    function in_es6(left, right) {&amp;#10;        if (((right instanceof Array) || ((typeof right) === &quot;string&quot;))) {&amp;#10;            return (right.indexOf(left) &gt; (- 1));&amp;#10;        } else {&amp;#10;            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {&amp;#10;                return right.has(left);&amp;#10;            } else {&amp;#10;                return (left in right);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;    container[&quot;in_es6&quot;] = in_es6;&amp;#10;    return container;&amp;#10;}&amp;#10;_pj = {};&amp;#10;_pj_snippets(_pj);&amp;#10;rating_keys = [&quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;];&amp;#10;function convert_key_to_rating(run_number, key) {&amp;#10;    var rating;&amp;#10;    rating = null;&amp;#10;    if (_pj.in_es6(key, rating_keys)) {&amp;#10;        rating = Number.parseInt(key);&amp;#10;        if ((run_number !== &quot;0&quot;)) {&amp;#10;            rating = (rating - 4);&amp;#10;        }&amp;#10;    }&amp;#10;    return rating;&amp;#10;}&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="participant = expInfo['participant']&amp;#10;run_number = expInfo['run_number']&amp;#10;&amp;#10;start_text_str = 'Calibrating scanner'&amp;#10;if run_number == '0':&amp;#10;    start_text_str = 'Instruction text'&amp;#10;conditions_file = 'ROC_Session' + str(run_number) + '.csv'&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin JS Experiment" updates="constant" val="participant = expInfo[&quot;participant&quot;];&amp;#10;run_number = expInfo[&quot;run_number&quot;];&amp;#10;start_text_str = &quot;Calibrating scanner&quot;;&amp;#10;if ((run_number === &quot;0&quot;)) {&amp;#10;    start_text_str = &quot;Instruction text&quot;;&amp;#10;}&amp;#10;conditions_file = ((&quot;ROC_Session&quot; + run_number.toString()) + &quot;.csv&quot;);&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Auto-&gt;JS" valType="str"/>
