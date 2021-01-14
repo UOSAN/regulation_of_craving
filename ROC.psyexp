@@ -187,8 +187,8 @@
         <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin JS Routine" updates="constant" val="stim_rating.depth = (- 30);&amp;#10;" valType="extendedCode"/>
-        <Param name="Begin Routine" updates="constant" val="# Set depth explicitly to workaround https://github.com/psychopy/psychopy/issues/3154&amp;#10;# Slider component not rendered in routine order&amp;#10;stim_rating.depth = -30" valType="extendedCode"/>
+        <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Auto-&gt;JS" valType="str"/>
         <Param name="Each Frame" updates="constant" val="# Update marker position and slider rating&amp;#10;# when there are keypresses of the rating buttons&amp;#10;r = convert_key_to_rating(expInfo['run_number'], stim_keyboard.keys)&amp;#10;stim_rating.markerPos = r&amp;#10;# confirm rating by setting to current markerPos&amp;#10;stim_rating.rating = r&amp;#10;" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="r = convert_key_to_rating(expInfo[&quot;run_number&quot;], stim_keyboard.keys);&amp;#10;stim_rating.markerPos = r;&amp;#10;stim_rating.rating = r;&amp;#10;" valType="extendedCode"/>
