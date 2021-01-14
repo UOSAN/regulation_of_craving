@@ -28,7 +28,42 @@ psychoJS.openWindow({
 
 // store info about the experiment session:
 let expName = 'ROC';  // from the Builder filename that created this script
-let expInfo = {'participant': '', 'run_number': '1'};
+let expInfo = {'participant': '', 'session': '', 'run_number': '1'};
+
+// Start code blocks for 'Before Experiment'
+var _pj;
+
+function _pj_snippets(container) {
+    function in_es6(left, right) {
+        if (((right instanceof Array) || ((typeof right) === "string"))) {
+            return (right.indexOf(left) > (- 1));
+        } else {
+            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {
+                return right.has(left);
+            } else {
+                return (left in right);
+            }
+        }
+    }
+    container["in_es6"] = in_es6;
+    return container;
+}
+_pj = {};
+_pj_snippets(_pj);
+rating_keys = ["5", "6", "7", "8", "9"];
+
+var rating;
+function convert_key_to_rating(run_number, key) {
+    var rating;
+    rating = null;
+    if (_pj.in_es6(key, rating_keys)) {
+        rating = Number.parseInt(key);
+        if ((run_number !== "0")) {
+            rating = (rating - 4);
+        }
+    }
+    return rating;
+}
 
 // schedule the experiment:
 psychoJS.schedule(psychoJS.gui.DlgFromDict({
@@ -64,54 +99,54 @@ dialogCancelScheduler.add(quitPsychoJS, '', false);
 psychoJS.start({
   expName: expName,
   expInfo: expInfo,
-	resources: [
-		{name: 'ROC_Session0.csv', path: './resources/ROC_Session0.csv'},
-		{name: 'ROC_Session1.csv', path: './resources/ROC_Session1.csv'},
-		{name: 'ROC_Session2.csv', path: './resources/ROC_Session2.csv'},
-		{name: 'ROC_Session3.csv', path: './resources/ROC_Session3.csv'},
-		{name: 'ROC_Session4.csv', path: './resources/ROC_Session4.csv'},
-		{name: 'ROC_Session5.csv', path: './resources/ROC_Session5.csv'},
-		{name: 'Resources/tobacco_0002.jpg', path: './resources/Resources/tobacco_0002.jpg'},
-		{name: 'Resources/healthy2.jpg', path: './resources/Resources/healthy2.jpg'},
-		{name: 'Resources/tobacco_0016.jpg', path: './resources/Resources/tobacco_0016.jpg'},
-		{name: 'Resources/tobacco_0011.jpg', path: './resources/Resources/tobacco_0011.jpg'},
-		{name: 'Resources/healthy5.jpg', path: './resources/Resources/healthy5.jpg'},
-		{name: 'Resources/healthy8.jpg', path: './resources/Resources/healthy8.jpg'},
-		{name: 'Resources/tobacco_0030.jpg', path: './resources/Resources/tobacco_0030.jpg'},
-		{name: 'Resources/tobacco_0038.jpg', path: './resources/Resources/tobacco_0038.jpg'},
-		{name: 'Resources/healthy11.jpg', path: './resources/Resources/healthy11.jpg'},
-		{name: 'Resources/healthy14.jpg', path: './resources/Resources/healthy14.jpg'},
-		{name: 'Resources/tobacco_0033.jpg', path: './resources/Resources/tobacco_0033.jpg'},
-		{name: 'Resources/tobacco_0032.jpg', path: './resources/Resources/tobacco_0032.jpg'},
-		{name: 'Resources/tobacco_0031.jpg', path: './resources/Resources/tobacco_0031.jpg'},
-		{name: 'Resources/healthy19.jpg', path: './resources/Resources/healthy19.jpg'},
-		{name: 'Resources/healthy20.jpg', path: './resources/Resources/healthy20.jpg'},
-		{name: 'Resources/tobacco_0019.jpg', path: './resources/Resources/tobacco_0019.jpg'},
-		{name: 'Resources/healthy21.jpg', path: './resources/Resources/healthy21.jpg'},
-		{name: 'Resources/healthy23.jpg', path: './resources/Resources/healthy23.jpg'},
-		{name: 'Resources/tobacco_0029.jpg', path: './resources/Resources/tobacco_0029.jpg'},
-		{name: 'Resources/tobacco_0015.jpg', path: './resources/Resources/tobacco_0015.jpg'},
-		{name: 'Resources/healthy27.jpg', path: './resources/Resources/healthy27.jpg'},
-		{name: 'Resources/healthy29.jpg', path: './resources/Resources/healthy29.jpg'},
-		{name: 'Resources/healthy32.jpg', path: './resources/Resources/healthy32.jpg'},
-		{name: 'Resources/tobacco_0025.jpg', path: './resources/Resources/tobacco_0025.jpg'},
-		{name: 'Resources/tobacco_0027.jpg', path: './resources/Resources/tobacco_0027.jpg'},
-		{name: 'Resources/healthy33.jpg', path: './resources/Resources/healthy33.jpg'},
-		{name: 'Resources/tobacco_0005.jpg', path: './resources/Resources/tobacco_0005.jpg'},
-		{name: 'Resources/healthy34.jpg', path: './resources/Resources/healthy34.jpg'},
-		{name: 'Resources/healthy35.jpg', path: './resources/Resources/healthy35.jpg'},
-		{name: 'Resources/tobacco_0012.jpg', path: './resources/Resources/tobacco_0012.jpg'},
-		{name: 'Resources/healthy36.jpg', path: './resources/Resources/healthy36.jpg'},
-		{name: 'Resources/healthy37.jpg', path: './resources/Resources/healthy37.jpg'},
-		{name: 'Resources/tobacco_0037.jpg', path: './resources/Resources/tobacco_0037.jpg'},
-		{name: 'Resources/tobacco_0014.jpg', path: './resources/Resources/tobacco_0014.jpg'},
-		{name: 'Resources/tobacco_0003.jpg', path: './resources/Resources/tobacco_0003.jpg'},
-		{name: 'Resources/tobacco_0018.jpg', path: './resources/Resources/tobacco_0018.jpg'},
-		{name: 'Resources/healthy39.jpg', path: './resources/Resources/healthy39.jpg'},
-		{name: 'Resources/healthy41.jpg', path: './resources/Resources/healthy41.jpg'},
-		{name: 'Resources/healthy45.jpg', path: './resources/Resources/healthy45.jpg'},
-		{name: 'Resources/tobacco_0039.jpg', path: './resources/Resources/tobacco_0039.jpg'},
-	],
+  resources: [
+    {name: 'ROC_Session0.csv', path: './resources/ROC_Session0.csv'},
+    {name: 'ROC_Session1.csv', path: './resources/ROC_Session1.csv'},
+    {name: 'ROC_Session2.csv', path: './resources/ROC_Session2.csv'},
+    {name: 'ROC_Session3.csv', path: './resources/ROC_Session3.csv'},
+    {name: 'ROC_Session4.csv', path: './resources/ROC_Session4.csv'},
+    {name: 'ROC_Session5.csv', path: './resources/ROC_Session5.csv'},
+    {name: 'Resources/tobacco_0002.jpg', path: './resources/Resources/tobacco_0002.jpg'},
+    {name: 'Resources/healthy2.jpg', path: './resources/Resources/healthy2.jpg'},
+    {name: 'Resources/tobacco_0016.jpg', path: './resources/Resources/tobacco_0016.jpg'},
+    {name: 'Resources/tobacco_0011.jpg', path: './resources/Resources/tobacco_0011.jpg'},
+    {name: 'Resources/healthy5.jpg', path: './resources/Resources/healthy5.jpg'},
+    {name: 'Resources/healthy8.jpg', path: './resources/Resources/healthy8.jpg'},
+    {name: 'Resources/tobacco_0030.jpg', path: './resources/Resources/tobacco_0030.jpg'},
+    {name: 'Resources/tobacco_0038.jpg', path: './resources/Resources/tobacco_0038.jpg'},
+    {name: 'Resources/healthy11.jpg', path: './resources/Resources/healthy11.jpg'},
+    {name: 'Resources/healthy14.jpg', path: './resources/Resources/healthy14.jpg'},
+    {name: 'Resources/tobacco_0033.jpg', path: './resources/Resources/tobacco_0033.jpg'},
+    {name: 'Resources/tobacco_0032.jpg', path: './resources/Resources/tobacco_0032.jpg'},
+    {name: 'Resources/tobacco_0031.jpg', path: './resources/Resources/tobacco_0031.jpg'},
+    {name: 'Resources/healthy19.jpg', path: './resources/Resources/healthy19.jpg'},
+    {name: 'Resources/healthy20.jpg', path: './resources/Resources/healthy20.jpg'},
+    {name: 'Resources/tobacco_0019.jpg', path: './resources/Resources/tobacco_0019.jpg'},
+    {name: 'Resources/healthy21.jpg', path: './resources/Resources/healthy21.jpg'},
+    {name: 'Resources/healthy23.jpg', path: './resources/Resources/healthy23.jpg'},
+    {name: 'Resources/tobacco_0029.jpg', path: './resources/Resources/tobacco_0029.jpg'},
+    {name: 'Resources/tobacco_0015.jpg', path: './resources/Resources/tobacco_0015.jpg'},
+    {name: 'Resources/healthy27.jpg', path: './resources/Resources/healthy27.jpg'},
+    {name: 'Resources/healthy29.jpg', path: './resources/Resources/healthy29.jpg'},
+    {name: 'Resources/healthy32.jpg', path: './resources/Resources/healthy32.jpg'},
+    {name: 'Resources/tobacco_0025.jpg', path: './resources/Resources/tobacco_0025.jpg'},
+    {name: 'Resources/tobacco_0027.jpg', path: './resources/Resources/tobacco_0027.jpg'},
+    {name: 'Resources/healthy33.jpg', path: './resources/Resources/healthy33.jpg'},
+    {name: 'Resources/tobacco_0005.jpg', path: './resources/Resources/tobacco_0005.jpg'},
+    {name: 'Resources/healthy34.jpg', path: './resources/Resources/healthy34.jpg'},
+    {name: 'Resources/healthy35.jpg', path: './resources/Resources/healthy35.jpg'},
+    {name: 'Resources/tobacco_0012.jpg', path: './resources/Resources/tobacco_0012.jpg'},
+    {name: 'Resources/healthy36.jpg', path: './resources/Resources/healthy36.jpg'},
+    {name: 'Resources/healthy37.jpg', path: './resources/Resources/healthy37.jpg'},
+    {name: 'Resources/tobacco_0037.jpg', path: './resources/Resources/tobacco_0037.jpg'},
+    {name: 'Resources/tobacco_0014.jpg', path: './resources/Resources/tobacco_0014.jpg'},
+    {name: 'Resources/tobacco_0003.jpg', path: './resources/Resources/tobacco_0003.jpg'},
+    {name: 'Resources/tobacco_0018.jpg', path: './resources/Resources/tobacco_0018.jpg'},
+    {name: 'Resources/healthy39.jpg', path: './resources/Resources/healthy39.jpg'},
+    {name: 'Resources/healthy41.jpg', path: './resources/Resources/healthy41.jpg'},
+    {name: 'Resources/healthy45.jpg', path: './resources/Resources/healthy45.jpg'},
+    {name: 'Resources/tobacco_0039.jpg', path: './resources/Resources/tobacco_0039.jpg'},
+  ],
   });
 
 psychoJS.experimentLogger.setLevel(core.Logger.ServerLevel.DEBUG);
@@ -121,7 +156,7 @@ var frameDur;
 function updateInfo() {
   expInfo['date'] = util.MonotonicClock.getDateStr();  // add a simple timestamp
   expInfo['expName'] = expName;
-  expInfo['psychopyVersion'] = '2020.2.5';
+  expInfo['psychopyVersion'] = '2020.2.10';
   expInfo['OS'] = window.navigator.platform;
 
   // store frame rate of monitor if we can measure it successfully
@@ -167,15 +202,11 @@ function experimentInit() {
   window_width = psychoJS.window.size[0];
   window_height = psychoJS.window.size[1];
   
-  function is_mri_session(session) {
-      return ((session === "1") || (session === "2"));
-  }
   participant = expInfo["participant"];
   run_number = expInfo["run_number"];
-  if (is_mri_session(run_number)) {
-      start_text_str = "Calibrating scanner.\nPlease hold VERY still.";
-  } else {
-      start_text_str = "The task is about to begin.\nGet ready!";
+  start_text_str = "Calibrating scanner";
+  if ((run_number === "0")) {
+      start_text_str = "Instruction text";
   }
   conditions_file = (("ROC_Session" + run_number.toString()) + ".csv");
   
@@ -260,7 +291,7 @@ function experimentInit() {
     labels: ["No Desire", "Strong Desire"], ticks: [1, 2, 3, 4, 5],
     granularity: 0, style: [visual.Slider.Style.TRIANGLE_MARKER],
     color: new util.Color('LightGray'), 
-    fontFamily: 'HelveticaBold', bold: true, italic: false, depth: -7,
+    fontFamily: 'HelveticaBold', bold: true, italic: false, depth: -7, 
     flip: false,
   });
   
@@ -289,6 +320,7 @@ function experimentInit() {
 
 var t;
 var frameN;
+var continueRoutine;
 var setupComponents;
 function setupRoutineBegin(snapshot) {
   return function () {
@@ -296,6 +328,7 @@ function setupRoutineBegin(snapshot) {
     t = 0;
     setupClock.reset(); // clock
     frameN = -1;
+    continueRoutine = true; // until we're told otherwise
     // update component parameters for each repeat
     // keep track of which components have finished
     setupComponents = [];
@@ -303,19 +336,14 @@ function setupRoutineBegin(snapshot) {
     for (const thisComponent of setupComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-  };
+    return Scheduler.Event.NEXT;
+  }
 }
 
 
-var continueRoutine;
 function setupRoutineEachFrame(snapshot) {
   return function () {
     //------Loop for each frame of Routine 'setup'-------
-    let continueRoutine = true; // until we're told otherwise
     // get current time
     t = setupClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
@@ -371,6 +399,7 @@ function instructionsRoutineBegin(snapshot) {
     t = 0;
     instructionsClock.reset(); // clock
     frameN = -1;
+    continueRoutine = true; // until we're told otherwise
     // update component parameters for each repeat
     start_trigger.keys = undefined;
     start_trigger.rt = undefined;
@@ -383,18 +412,14 @@ function instructionsRoutineBegin(snapshot) {
     for (const thisComponent of instructionsComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-  };
+    return Scheduler.Event.NEXT;
+  }
 }
 
 
 function instructionsRoutineEachFrame(snapshot) {
   return function () {
     //------Loop for each frame of Routine 'instructions'-------
-    let continueRoutine = true; // until we're told otherwise
     // get current time
     t = instructionsClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
@@ -519,13 +544,13 @@ function trialRoutineBegin(snapshot) {
     t = 0;
     trialClock.reset(); // clock
     frameN = -1;
+    continueRoutine = true; // until we're told otherwise
     // update component parameters for each repeat
     background.setSize([window_width, window_height]);
     background.setFillColor(new util.Color(background_color));
     black_background.setSize([(window_width - 150), (window_height - 150)]);
     regulate_look.setText(regulate_or_look);
     stimulus.setImage(image_file);
-    stim_rating.depth = (- 30);
     
     stim_rating.reset()
     stim_keyboard.keys = undefined;
@@ -545,21 +570,16 @@ function trialRoutineBegin(snapshot) {
     for (const thisComponent of trialComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-  };
+    return Scheduler.Event.NEXT;
+  }
 }
 
 
 var frameRemains;
-var _pj;
-var rating_keys;
+var r;
 function trialRoutineEachFrame(snapshot) {
   return function () {
     //------Loop for each frame of Routine 'trial'-------
-    let continueRoutine = true; // until we're told otherwise
     // get current time
     t = trialClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
@@ -648,29 +668,9 @@ function trialRoutineEachFrame(snapshot) {
     if ((rating_text.status === PsychoJS.Status.STARTED || rating_text.status === PsychoJS.Status.FINISHED) && t >= frameRemains) {
       rating_text.setAutoDraw(false);
     }
-    var _pj;
-    function _pj_snippets(container) {
-        function in_es6(left, right) {
-            if (((right instanceof Array) || ((typeof right) === "string"))) {
-                return (right.indexOf(left) > (- 1));
-            } else {
-                if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {
-                    return right.has(left);
-                } else {
-                    return (left in right);
-                }
-            }
-        }
-        container["in_es6"] = in_es6;
-        return container;
-    }
-    _pj = {};
-    _pj_snippets(_pj);
-    rating_keys = ["1", "2", "3", "4", "5"];
-    if (_pj.in_es6(stim_keyboard.keys, rating_keys)) {
-        stim_rating.markerPos = Number.parseInt(stim_keyboard.keys);
-        stim_rating.rating = stim_rating.markerPos;
-    }
+    r = convert_key_to_rating(expInfo["run_number"], stim_keyboard.keys);
+    stim_rating.markerPos = r;
+    stim_rating.rating = r;
     
     
     // *stim_rating* updates
@@ -705,7 +705,7 @@ function trialRoutineEachFrame(snapshot) {
   }
 
     if (stim_keyboard.status === PsychoJS.Status.STARTED) {
-      let theseKeys = stim_keyboard.getKeys({keyList: ['1', '2', '3', '4', '5'], waitRelease: false});
+      let theseKeys = stim_keyboard.getKeys({keyList: ['5', '6', '7', '8', '9'], waitRelease: false});
       _stim_keyboard_allKeys = _stim_keyboard_allKeys.concat(theseKeys);
       if (_stim_keyboard_allKeys.length > 0) {
         stim_keyboard.keys = _stim_keyboard_allKeys[_stim_keyboard_allKeys.length - 1].name;  // just the last key pressed
@@ -771,6 +771,7 @@ function endRoutineBegin(snapshot) {
     t = 0;
     endClock.reset(); // clock
     frameN = -1;
+    continueRoutine = true; // until we're told otherwise
     routineTimer.add(4.000000);
     // update component parameters for each repeat
     // keep track of which components have finished
@@ -780,18 +781,14 @@ function endRoutineBegin(snapshot) {
     for (const thisComponent of endComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
-    // check if the Routine should terminate
-    if (!continueRoutine) {  // a component has requested a forced-end of Routine
-      return Scheduler.Event.NEXT;
-    }
-  };
+    return Scheduler.Event.NEXT;
+  }
 }
 
 
 function endRoutineEachFrame(snapshot) {
   return function () {
     //------Loop for each frame of Routine 'end'-------
-    let continueRoutine = true; // until we're told otherwise
     // get current time
     t = endClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
