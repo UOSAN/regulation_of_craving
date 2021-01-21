@@ -273,7 +273,7 @@
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
       <KeyboardComponent name="start_trigger">
-        <Param name="allowedKeys" updates="constant" val="" valType="code"/>
+        <Param name="allowedKeys" updates="constant" val="'apostrophe'" valType="code"/>
         <Param name="correctAns" updates="constant" val="" valType="str"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="discard previous" updates="constant" val="True" valType="bool"/>
