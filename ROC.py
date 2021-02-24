@@ -1,8 +1,8 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy3 Experiment Builder (v2020.2.10),
-    on Fri Feb  5 15:28:05 2021
+This experiment was created using PsychoPy3 Experiment Builder (v2021.1.0),
+    on Wed Feb 24 10:52:48 2021
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -15,14 +15,14 @@ from __future__ import absolute_import, division
 
 from psychopy import locale_setup
 from psychopy import prefs
-from psychopy import sound, gui, visual, core, data, event, logging, clock
+from psychopy import sound, gui, visual, core, data, event, logging, clock, colors
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
 
 import numpy as np  # whole numpy lib is available, prepend 'np.'
 from numpy import (sin, cos, tan, log, log10, pi, average,
                    sqrt, std, deg2rad, rad2deg, linspace, asarray)
-from numpy.random import random, randint, normal, shuffle
+from numpy.random import random, randint, normal, shuffle, choice as randchoice
 import os  # handy system and path functions
 import sys  # to get file system encoding
 
@@ -35,8 +35,7 @@ def convert_key_to_rating(run_number, key):
     rating = None
     if key in rating_keys:
         rating = int(key)
-        if run_number != '0':
-            rating = rating - 4
+        rating = rating - 4
 
     return rating
 
@@ -46,7 +45,7 @@ _thisDir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-psychopyVersion = '2020.2.10'
+psychopyVersion = '2021.1.0'
 expName = 'regulation_of_craving'  # from the Builder filename that created this script
 expInfo = {'participant': '', 'session': '', 'run_number': '1'}
 dlg = gui.DlgFromDict(dictionary=expInfo, sortKeys=False, title=expName)
@@ -122,22 +121,19 @@ fixation = visual.ShapeStim(
     win=win, name='fixation', vertices='cross',units='pix', 
     size=(48, 48),
     ori=0, pos=(0, 0),
-    lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
-    fillColor=[1,1,1], fillColorSpace='rgb',
+    lineWidth=1,     colorSpace='rgb',  lineColor=[1,1,1], fillColor=[1,1,1],
     opacity=1, depth=0.0, interpolate=True)
 background = visual.Rect(
     win=win, name='background',units='pix', 
     width=[1.0, 1.0][0], height=[1.0, 1.0][1],
     ori=0, pos=(0, 0),
-    lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
-    fillColor=1.0, fillColorSpace='rgb',
+    lineWidth=1,     colorSpace='rgb',  lineColor=[1,1,1], fillColor='white',
     opacity=1, depth=-1.0, interpolate=True)
 black_background = visual.Rect(
     win=win, name='black_background',units='pix', 
     width=[1.0, 1.0][0], height=[1.0, 1.0][1],
     ori=0, pos=(0, 0),
-    lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
-    fillColor=[-1,-1,-1], fillColorSpace='rgb',
+    lineWidth=1,     colorSpace='rgb',  lineColor=[1,1,1], fillColor=[-1,-1,-1],
     opacity=1, depth=-2.0, interpolate=True)
 regulate_look = visual.TextStim(win=win, name='regulate_look',
     text='default text',
@@ -163,10 +159,11 @@ rating_text = visual.TextStim(win=win, name='rating_text',
     depth=-5.0);
 stim_rating = visual.Slider(win=win, name='stim_rating',
     size=(1.0, 0.025), pos=(0, -0.2), units=None,
-    labels=('No Desire', 'Strong Desire'), ticks=(1, 2, 3, 4, 5),
-    granularity=0, style=['triangleMarker'],
-    color='LightGray', font='HelveticaBold',
-    flip=False, depth=-7)
+    labels=('No Desire', 'Strong Desire'), ticks=(1, 2, 3, 4, 5), granularity=0,
+    style='rating', styleTweaks=('triangleMarker',), opacity=1,
+    color='LightGray', fillColor='Red', borderColor='White', colorSpace='rgb',
+    font='HelveticaBold', labelHeight=0.05,
+    flip=False, depth=-7, readOnly=False)
 stim_keyboard = keyboard.Keyboard()
 
 # Initialize components for Routine "end"
@@ -341,8 +338,8 @@ for thisTrial in trials:
     # ------Prepare to start Routine "trial"-------
     continueRoutine = True
     # update component parameters for each repeat
-    background.setSize((window_width, window_height))
     background.setFillColor(background_color)
+    background.setSize((window_width, window_height))
     black_background.setSize((window_width - 150, window_height - 150))
     regulate_look.setText(regulate_or_look)
     stimulus.setImage(image_file)
