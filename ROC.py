@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2021.1.0),
-    on Wed Feb 24 10:52:48 2021
+    on Fri Feb 26 10:23:43 2021
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -162,7 +162,7 @@ stim_rating = visual.Slider(win=win, name='stim_rating',
     labels=('No Desire', 'Strong Desire'), ticks=(1, 2, 3, 4, 5), granularity=0,
     style='rating', styleTweaks=('triangleMarker',), opacity=1,
     color='LightGray', fillColor='Red', borderColor='White', colorSpace='rgb',
-    font='HelveticaBold', labelHeight=0.05,
+    font='Helvetica', labelHeight=0.05,
     flip=False, depth=-7, readOnly=False)
 stim_keyboard = keyboard.Keyboard()
 

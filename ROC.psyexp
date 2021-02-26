@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2020.2.10">
+<PsychoPy2experiment encoding="utf-8" version="2021.1.0">
   <Settings>
     <Param name="Audio latency priority" updates="None" val="use prefs" valType="str"/>
     <Param name="Audio lib" updates="None" val="use prefs" valType="str"/>
@@ -35,6 +35,8 @@
   <Routines>
     <Routine name="trial">
       <PolygonComponent name="fixation">
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="1" valType="code"/>
         <Param name="fillColor" updates="constant" val="$[1,1,1]" valType="str"/>
@@ -60,6 +62,8 @@
         <Param name="units" updates="None" val="pix" valType="str"/>
       </PolygonComponent>
       <PolygonComponent name="background">
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="fillColor" updates="set every repeat" val="$background_color" valType="str"/>
@@ -85,6 +89,8 @@
         <Param name="units" updates="None" val="pix" valType="str"/>
       </PolygonComponent>
       <PolygonComponent name="black_background">
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="fillColor" updates="constant" val="$[-1,-1,-1]" valType="str"/>
@@ -112,6 +118,7 @@
       <TextComponent name="regulate_look">
         <Param name="color" updates="constant" val="white" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -136,6 +143,7 @@
       <ImageComponent name="stimulus">
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
@@ -161,6 +169,7 @@
       <TextComponent name="rating_text">
         <Param name="color" updates="constant" val="white" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -200,19 +209,24 @@
         <Param name="name" updates="None" val="code" valType="code"/>
       </CodeComponent>
       <SliderComponent name="stim_rating">
+        <Param name="borderColor" updates="constant" val="White" valType="color"/>
         <Param name="color" updates="constant" val="LightGray" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="fillColor" updates="constant" val="Red" valType="color"/>
         <Param name="flip" updates="constant" val="False" valType="bool"/>
-        <Param name="font" updates="constant" val="HelveticaBold" valType="str"/>
+        <Param name="font" updates="constant" val="Helvetica" valType="str"/>
         <Param name="forceEndRoutine" updates="constant" val="False" valType="bool"/>
         <Param name="granularity" updates="constant" val="0" valType="code"/>
         <Param name="labels" updates="constant" val="('No Desire', 'Strong Desire')" valType="list"/>
+        <Param name="letterHeight" updates="constant" val="0.05" valType="num"/>
         <Param name="name" updates="None" val="stim_rating" valType="code"/>
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="pos" updates="constant" val="(0, -0.2)" valType="code"/>
+        <Param name="readOnly" updates="constant" val="False" valType="bool"/>
         <Param name="saveStartStop" updates="None" val="True" valType="bool"/>
         <Param name="size" updates="constant" val="(1.0, 0.025)" valType="code"/>
         <Param name="startEstim" updates="None" val="8" valType="code"/>
@@ -223,7 +237,8 @@
         <Param name="storeHistory" updates="constant" val="False" valType="bool"/>
         <Param name="storeRating" updates="constant" val="True" valType="bool"/>
         <Param name="storeRatingTime" updates="constant" val="True" valType="bool"/>
-        <Param name="styles" updates="constant" val="['triangleMarker']" valType="fixedList"/>
+        <Param name="styleTweaks" updates="constant" val="('triangleMarker',)" valType="list"/>
+        <Param name="styles" updates="constant" val="rating" valType="str"/>
         <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
         <Param name="ticks" updates="constant" val="(1, 2, 3, 4, 5)" valType="list"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
@@ -251,6 +266,7 @@
       <TextComponent name="start_text">
         <Param name="color" updates="constant" val="white" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="2" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -295,6 +311,7 @@
       <TextComponent name="end_text">
         <Param name="color" updates="constant" val="white" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -336,8 +353,8 @@
         <Param name="name" updates="None" val="get_window_size" valType="code"/>
       </CodeComponent>
       <CodeComponent name="get_conditions_file">
-        <Param name="Before Experiment" updates="constant" val="rating_keys = ['5', '6', '7', '8', '9']&amp;#10;&amp;#10;&amp;#10;def convert_key_to_rating(run_number, key):&amp;#10;    rating = None&amp;#10;    if key in rating_keys:&amp;#10;        rating = int(key)&amp;#10;        if run_number != '0':&amp;#10;            rating = rating - 4&amp;#10;&amp;#10;    return rating" valType="extendedCode"/>
-        <Param name="Before JS Experiment" updates="constant" val="var _pj;&amp;#10;function _pj_snippets(container) {&amp;#10;    function in_es6(left, right) {&amp;#10;        if (((right instanceof Array) || ((typeof right) === &quot;string&quot;))) {&amp;#10;            return (right.indexOf(left) &gt; (- 1));&amp;#10;        } else {&amp;#10;            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {&amp;#10;                return right.has(left);&amp;#10;            } else {&amp;#10;                return (left in right);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;    container[&quot;in_es6&quot;] = in_es6;&amp;#10;    return container;&amp;#10;}&amp;#10;_pj = {};&amp;#10;_pj_snippets(_pj);&amp;#10;rating_keys = [&quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;];&amp;#10;function convert_key_to_rating(run_number, key) {&amp;#10;    var rating;&amp;#10;    rating = null;&amp;#10;    if (_pj.in_es6(key, rating_keys)) {&amp;#10;        rating = Number.parseInt(key);&amp;#10;        if ((run_number !== &quot;0&quot;)) {&amp;#10;            rating = (rating - 4);&amp;#10;        }&amp;#10;    }&amp;#10;    return rating;&amp;#10;}&amp;#10;" valType="extendedCode"/>
+        <Param name="Before Experiment" updates="constant" val="rating_keys = ['5', '6', '7', '8', '9']&amp;#10;&amp;#10;&amp;#10;def convert_key_to_rating(run_number, key):&amp;#10;    rating = None&amp;#10;    if key in rating_keys:&amp;#10;        rating = int(key)&amp;#10;        rating = rating - 4&amp;#10;&amp;#10;    return rating" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="var _pj;&amp;#10;function _pj_snippets(container) {&amp;#10;    function in_es6(left, right) {&amp;#10;        if (((right instanceof Array) || ((typeof right) === &quot;string&quot;))) {&amp;#10;            return (right.indexOf(left) &gt; (- 1));&amp;#10;        } else {&amp;#10;            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {&amp;#10;                return right.has(left);&amp;#10;            } else {&amp;#10;                return (left in right);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;    container[&quot;in_es6&quot;] = in_es6;&amp;#10;    return container;&amp;#10;}&amp;#10;_pj = {};&amp;#10;_pj_snippets(_pj);&amp;#10;rating_keys = [&quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;];&amp;#10;function convert_key_to_rating(run_number, key) {&amp;#10;    var rating;&amp;#10;    rating = null;&amp;#10;    if (_pj.in_es6(key, rating_keys)) {&amp;#10;        rating = Number.parseInt(key);&amp;#10;        rating = (rating - 4);&amp;#10;    }&amp;#10;    return rating;&amp;#10;}&amp;#10;" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="participant = expInfo['participant']&amp;#10;run_number = expInfo['run_number']&amp;#10;&amp;#10;start_text_str = 'Calibrating scanner'&amp;#10;if run_number == '0':&amp;#10;    start_text_str = 'Instruction text'&amp;#10;conditions_file = 'ROC_Session' + str(run_number) + '.csv'&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="participant = expInfo[&quot;participant&quot;];&amp;#10;run_number = expInfo[&quot;run_number&quot;];&amp;#10;start_text_str = &quot;Calibrating scanner&quot;;&amp;#10;if ((run_number === &quot;0&quot;)) {&amp;#10;    start_text_str = &quot;Instruction text&quot;;&amp;#10;}&amp;#10;conditions_file = ((&quot;ROC_Session&quot; + run_number.toString()) + &quot;.csv&quot;);&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
