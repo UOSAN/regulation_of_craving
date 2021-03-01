@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2021.1.0),
-    on Fri Feb 26 10:23:43 2021
+    on Mon Mar  1 15:55:22 2021
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -31,7 +31,7 @@ from psychopy.hardware import keyboard
 rating_keys = ['5', '6', '7', '8', '9']
 
 
-def convert_key_to_rating(run_number, key):
+def convert_key_to_rating(key):
     rating = None
     if key in rating_keys:
         rating = int(key)
@@ -474,7 +474,7 @@ for thisTrial in trials:
                 rating_text.setAutoDraw(False)
         # Update marker position and slider rating
         # when there are keypresses of the rating buttons
-        r = convert_key_to_rating(expInfo['run_number'], stim_keyboard.keys)
+        r = convert_key_to_rating(stim_keyboard.keys)
         stim_rating.markerPos = r
         # confirm rating by setting to current markerPos
         stim_rating.rating = r
