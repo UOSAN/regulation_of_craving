@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2021.1.0),
-    on Mon Mar  1 15:55:22 2021
+    on Mon Mar  1 16:23:50 2021
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -97,8 +97,19 @@ window_width = win.clientSize[0]
 window_height = win.clientSize[1]
 participant = expInfo['participant']
 run_number = expInfo['run_number']
+is_first = False
 
-start_text_str = 'Calibrating scanner'
+if is_first:
+    start_text_str = 'Calibrating scanner'
+    start_text_duration = 120
+    end_text_str = 'The task has ended. The next task will start in a few seconds.'
+    end_text_duration = 10
+else:
+    start_text_str = ''
+    start_text_duration = 0.1
+    end_text_str = ''
+    end_text_duration = 0.1
+
 if run_number == '0':
     start_text_str = 'Instruction text'
 conditions_file = 'ROC_Session' + str(run_number) + '.csv'
@@ -169,7 +180,7 @@ stim_keyboard = keyboard.Keyboard()
 # Initialize components for Routine "end"
 endClock = core.Clock()
 end_text = visual.TextStim(win=win, name='end_text',
-    text='The task is now complete.',
+    text=end_text_str,
     font='Helvetica',
     pos=(0, 0), height=0.075, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
@@ -269,6 +280,14 @@ while continueRoutine:
         start_text.tStartRefresh = tThisFlipGlobal  # on global time
         win.timeOnFlip(start_text, 'tStartRefresh')  # time at next scr refresh
         start_text.setAutoDraw(True)
+    if start_text.status == STARTED:
+        # is it time to stop? (based on global clock, using actual start)
+        if tThisFlipGlobal > start_text.tStartRefresh + start_text_duration-frameTolerance:
+            # keep track of stop time/frame for later
+            start_text.tStop = t  # not accounting for scr refresh
+            start_text.frameNStop = frameN  # exact frame index
+            win.timeOnFlip(start_text, 'tStopRefresh')  # time at next scr refresh
+            start_text.setAutoDraw(False)
     
     # *start_trigger* updates
     waitOnFlip = False
@@ -283,6 +302,14 @@ while continueRoutine:
         waitOnFlip = True
         win.callOnFlip(start_trigger.clock.reset)  # t=0 on next screen flip
         win.callOnFlip(start_trigger.clearEvents, eventType='keyboard')  # clear events on next screen flip
+    if start_trigger.status == STARTED:
+        # is it time to stop? (based on global clock, using actual start)
+        if tThisFlipGlobal > start_trigger.tStartRefresh + start_text_duration-frameTolerance:
+            # keep track of stop time/frame for later
+            start_trigger.tStop = t  # not accounting for scr refresh
+            start_trigger.frameNStop = frameN  # exact frame index
+            win.timeOnFlip(start_trigger, 'tStopRefresh')  # time at next scr refresh
+            start_trigger.status = FINISHED
     if start_trigger.status == STARTED and not waitOnFlip:
         theseKeys = start_trigger.getKeys(keyList=['apostrophe'], waitRelease=False)
         _start_trigger_allKeys.extend(theseKeys)
@@ -573,7 +600,6 @@ for thisTrial in trials:
 
 # ------Prepare to start Routine "end"-------
 continueRoutine = True
-routineTimer.add(4.000000)
 # update component parameters for each repeat
 # keep track of which components have finished
 endComponents = [end_text]
@@ -591,7 +617,7 @@ endClock.reset(-_timeToFirstFrame)  # t0 is time of first possible flip
 frameN = -1
 
 # -------Run Routine "end"-------
-while continueRoutine and routineTimer.getTime() > 0:
+while continueRoutine:
     # get current time
     t = endClock.getTime()
     tThisFlip = win.getFutureFlipTime(clock=endClock)
@@ -609,7 +635,7 @@ while continueRoutine and routineTimer.getTime() > 0:
         end_text.setAutoDraw(True)
     if end_text.status == STARTED:
         # is it time to stop? (based on global clock, using actual start)
-        if tThisFlipGlobal > end_text.tStartRefresh + 4.0-frameTolerance:
+        if tThisFlipGlobal > end_text.tStartRefresh + end_text_duration-frameTolerance:
             # keep track of stop time/frame for later
             end_text.tStop = t  # not accounting for scr refresh
             end_text.frameNStop = frameN  # exact frame index
@@ -637,6 +663,8 @@ while continueRoutine and routineTimer.getTime() > 0:
 for thisComponent in endComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
+# the Routine "end" was not non-slip safe, so reset the non-slip timer
+routineTimer.reset()
 
 # Flip one final time so any remaining win.callOnFlip() 
 # and win.timeOnFlip() tasks get executed before quitting
