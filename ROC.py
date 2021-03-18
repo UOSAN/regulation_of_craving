@@ -115,8 +115,8 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
     else:
         start_text_str = ''
         start_text_duration = 0.1
-        end_text_str = ''
-        end_text_duration = 0.1
+        end_text_str = 'The task has ended. Waiting for researcher to start next task.'
+        end_text_duration = 120
 
     conditions_file = 'conditions' + os.sep + 'ROC_' + participant + '_Session' + str(expInfo['session']) + '_Run' + str(run_number) + '.csv'
     # session 0 is a practice
@@ -196,6 +196,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
         color='white', colorSpace='rgb', opacity=1,
         languageStyle='LTR',
         depth=0.0);
+    end_key_resp = keyboard.Keyboard()
 
     # Create some handy timers
     globalClock = core.Clock()  # to track the time since experiment started
@@ -602,8 +603,11 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
     # ------Prepare to start Routine "end"-------
     continueRoutine = True
     # update component parameters for each repeat
+    end_key_resp.keys = []
+    end_key_resp.rt = []
+    _end_key_resp_allKeys = []
     # keep track of which components have finished
-    endComponents = [end_text]
+    endComponents = [end_text, end_key_resp]
     for thisComponent in endComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -643,6 +647,36 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                 win.timeOnFlip(end_text, 'tStopRefresh')  # time at next scr refresh
                 end_text.setAutoDraw(False)
 
+        # *end_key_resp* updates
+        waitOnFlip = False
+        if end_key_resp.status == NOT_STARTED and tThisFlip >= 0.0 - frameTolerance:
+            # keep track of start time/frame for later
+            end_key_resp.frameNStart = frameN  # exact frame index
+            end_key_resp.tStart = t  # local t and not account for scr refresh
+            end_key_resp.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(end_key_resp, 'tStartRefresh')  # time at next scr refresh
+            end_key_resp.status = STARTED
+            # keyboard checking is just starting
+            waitOnFlip = True
+            win.callOnFlip(end_key_resp.clock.reset)  # t=0 on next screen flip
+            win.callOnFlip(end_key_resp.clearEvents, eventType='keyboard')  # clear events on next screen flip
+        if end_key_resp.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > end_key_resp.tStartRefresh + asarray(end_text_duration)-frameTolerance:
+                # keep track of stop time/frame for later
+                end_key_resp.tStop = t  # not accounting for scr refresh
+                end_key_resp.frameNStop = frameN  # exact frame index
+                win.timeOnFlip(end_key_resp, 'tStopRefresh')  # time at next scr refresh
+                end_key_resp.status = FINISHED
+        if end_key_resp.status == STARTED and not waitOnFlip:
+            theseKeys = end_key_resp.getKeys(keyList=['space'], waitRelease=False)
+            _end_key_resp_allKeys.extend(theseKeys)
+            if len(_end_key_resp_allKeys):
+                end_key_resp.keys = _end_key_resp_allKeys[-1].name  # just the last key pressed
+                end_key_resp.rt = _end_key_resp_allKeys[-1].rt
+                # a response ends the routine
+                continueRoutine = False
+
         # check for quit (typically the Esc key)
         if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
             core.quit()
@@ -664,6 +698,15 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
     for thisComponent in endComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
+    # check responses
+    if end_key_resp.keys in ['', [], None]:  # No response was made
+        end_key_resp.keys = None
+    thisExp.addData('end_key_resp.keys', end_key_resp.keys)
+    if end_key_resp.keys != None:  # we had a response
+        thisExp.addData('end_key_resp.rt', end_key_resp.rt)
+    thisExp.addData('end_key_resp.started', end_key_resp.tStartRefresh)
+    thisExp.addData('end_key_resp.stopped', end_key_resp.tStopRefresh)
+    thisExp.nextEntry()
     # the Routine "end" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
 
