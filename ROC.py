@@ -758,11 +758,10 @@ class Cli:
                             )
 
         parser.add_argument('--is_first',
-                            metavar='First in block',
-                            required=True,
-                            help='True if the first run in a block, False if not.'
-                                 'Example: --is_first True',
-                            type=bool,
+                            required=False,
+                            help='Include argument if the first run in a block.'
+                                 'Example: --is_first',
+                            action='store_true',
                             dest='is_first'
                             )
 
