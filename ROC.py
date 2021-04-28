@@ -57,7 +57,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
     os.chdir(_thisDir)
 
     # Store info about the experiment session
-    psychopyVersion = '2021.1.0'
+    psychopyVersion = '2021.1.2'
     expName = 'regulation_of_craving'  # from the Builder filename that created this script
     expInfo = {'participant': participant_id, 'session': session, 'run_number': run_number}
     expInfo['date'] = data.getDateStr()  # add a simple timestamp
@@ -69,12 +69,12 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
 
     # An ExperimentHandler isn't essential but helps with data saving
     thisExp = data.ExperimentHandler(name=expName, version='',
-        extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/pnovak2/src/smoking/down_regulation_of_craving/ROC.py',
-        savePickle=True, saveWideText=True,
-        dataFileName=filename)
+                                     extraInfo=expInfo, runtimeInfo=None,
+                                     originPath='/Users/pnovak2/src/smoking/regulation_of_craving/ROC_lastrun.py',
+                                     savePickle=True, saveWideText=True,
+                                     dataFileName=filename)
     # save a log file for detail verbose info
-    logFile = logging.LogFile(filename+'.log', level=logging.DEBUG)
+    logFile = logging.LogFile(filename + '.log', level=logging.DEBUG)
     logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
 
     endExpNow = False  # flag for 'escape' or other condition => quit the exp
@@ -86,7 +86,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
     win = visual.Window(
         size=[2560, 1440], fullscr=True, screen=0,
         winType='pyglet', allowGUI=False, allowStencil=False,
-        monitor='testMonitor', color=[-1,-1,-1], colorSpace='rgb',
+        monitor='testMonitor', color=[-1, -1, -1], colorSpace='rgb',
         blendMode='avg', useFBO=True,
         units='height')
     # store frame rate of monitor if we can measure it
@@ -118,84 +118,92 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
         end_text_str = 'The task has ended. Waiting for researcher to start next task.'
         end_text_duration = 3600
 
-    conditions_file = 'conditions' + os.sep + 'ROC_' + participant + '_Session' + str(expInfo['session']) + '_Run' + str(run_number) + '.csv'
+    conditions_file = 'conditions/ROC_' + participant + '_Session' + str(expInfo['session']) + '_Run' + str(
+        run_number) + '.csv'
     # session 0 is a practice
     if expInfo['session'] == '0':
-        start_text_str = 'Practice session for ROC task'
+        start_text_str = 'Practice session for the picture task'
         start_text_duration = 20
         conditions_file = 'ROC_Practice.csv'
 
     # Initialize components for Routine "instructions"
     instructionsClock = core.Clock()
+    title_text = visual.TextStim(win=win, name='title_text',
+                                 text='The Picture Task',
+                                 font='Open Sans',
+                                 pos=(0, 0), height=0.1, wrapWidth=None, ori=0.0,
+                                 color='white', colorSpace='rgb', opacity=None,
+                                 languageStyle='LTR',
+                                 depth=0.0);
     start_text = visual.TextStim(win=win, name='start_text',
-        text=start_text_str,
-        font='Helvetica',
-        pos=(0, 0), height=0.075, wrapWidth=None, ori=0,
-        color='white', colorSpace='rgb', opacity=1,
-        languageStyle='LTR',
-        depth=0.0);
+                                 text=start_text_str,
+                                 font='Helvetica',
+                                 pos=(0, 0), height=0.075, wrapWidth=None, ori=0,
+                                 color='white', colorSpace='rgb', opacity=1,
+                                 languageStyle='LTR',
+                                 depth=-1.0);
     start_trigger = keyboard.Keyboard()
 
     # Initialize components for Routine "trial"
     trialClock = core.Clock()
     fixation = visual.ShapeStim(
-        win=win, name='fixation', vertices='cross',units='pix',
+        win=win, name='fixation', vertices='cross', units='pix',
         size=(48, 48),
         ori=0, pos=(0, 0),
-        lineWidth=1,     colorSpace='rgb',  lineColor=[1,1,1], fillColor=[1,1,1],
+        lineWidth=1, colorSpace='rgb', lineColor=[1, 1, 1], fillColor=[1, 1, 1],
         opacity=1, depth=0.0, interpolate=True)
     background = visual.Rect(
-        win=win, name='background',units='pix',
+        win=win, name='background', units='pix',
         width=[1.0, 1.0][0], height=[1.0, 1.0][1],
         ori=0, pos=(0, 0),
-        lineWidth=1,     colorSpace='rgb',  lineColor=[1,1,1], fillColor='white',
+        lineWidth=1, colorSpace='rgb', lineColor=[1, 1, 1], fillColor='white',
         opacity=1, depth=-1.0, interpolate=True)
     black_background = visual.Rect(
-        win=win, name='black_background',units='pix',
+        win=win, name='black_background', units='pix',
         width=[1.0, 1.0][0], height=[1.0, 1.0][1],
         ori=0, pos=(0, 0),
-        lineWidth=1,     colorSpace='rgb',  lineColor=[1,1,1], fillColor=[-1,-1,-1],
+        lineWidth=1, colorSpace='rgb', lineColor=[1, 1, 1], fillColor=[-1, -1, -1],
         opacity=1, depth=-2.0, interpolate=True)
     regulate_look = visual.TextStim(win=win, name='regulate_look',
-        text='default text',
-        font='Helvetica',
-        pos=(0, 0), height=0.075, wrapWidth=None, ori=0,
-        color='white', colorSpace='rgb', opacity=1,
-        languageStyle='LTR',
-        depth=-3.0);
+                                    text='',
+                                    font='Helvetica',
+                                    pos=(0, 0), height=0.075, wrapWidth=None, ori=0,
+                                    color='white', colorSpace='rgb', opacity=1,
+                                    languageStyle='LTR',
+                                    depth=-3.0);
     stimulus = visual.ImageStim(
         win=win,
         name='stimulus',
         image='sin', mask=None,
         ori=0, pos=(0, 0), size=None,
-        color=[1,1,1], colorSpace='rgb', opacity=1,
+        color=[1, 1, 1], colorSpace='rgb', opacity=1,
         flipHoriz=False, flipVert=False,
         texRes=128, interpolate=True, depth=-4.0)
     rating_text = visual.TextStim(win=win, name='rating_text',
-        text='How much do you desire the item shown in the last picture?',
-        font='Helvetica',
-        pos=(0, 0.1), height=0.075, wrapWidth=None, ori=0,
-        color='white', colorSpace='rgb', opacity=1,
-        languageStyle='LTR',
-        depth=-5.0);
+                                  text='How much do you desire the item shown in the last picture?',
+                                  font='Helvetica',
+                                  pos=(0, 0.1), height=0.075, wrapWidth=None, ori=0,
+                                  color='white', colorSpace='rgb', opacity=1,
+                                  languageStyle='LTR',
+                                  depth=-5.0);
     stim_rating = visual.Slider(win=win, name='stim_rating',
-        size=(1.0, 0.025), pos=(0, -0.2), units=None,
-        labels=('No Desire', 'Strong Desire'), ticks=(1, 2, 3, 4, 5), granularity=0,
-        style='rating', styleTweaks=('triangleMarker',), opacity=1,
-        color='LightGray', fillColor='Red', borderColor='White', colorSpace='rgb',
-        font='Helvetica', labelHeight=0.05,
-        flip=False, depth=-7, readOnly=False)
+                                size=(1.0, 0.025), pos=(0, -0.2), units=None,
+                                labels=('No Desire', 'Strong Desire'), ticks=(1, 2, 3, 4, 5), granularity=0,
+                                style='rating', styleTweaks=('triangleMarker',), opacity=1,
+                                color='LightGray', fillColor='Red', borderColor='White', colorSpace='rgb',
+                                font='Helvetica', labelHeight=0.05,
+                                flip=False, depth=-7, readOnly=False)
     stim_keyboard = keyboard.Keyboard()
 
     # Initialize components for Routine "end"
     endClock = core.Clock()
     end_text = visual.TextStim(win=win, name='end_text',
-        text=end_text_str,
-        font='Helvetica',
-        pos=(0, 0), height=0.075, wrapWidth=None, ori=0,
-        color='white', colorSpace='rgb', opacity=1,
-        languageStyle='LTR',
-        depth=0.0);
+                               text=end_text_str,
+                               font='Helvetica',
+                               pos=(0, 0), height=0.075, wrapWidth=None, ori=0,
+                               color='white', colorSpace='rgb', opacity=1,
+                               languageStyle='LTR',
+                               depth=0.0);
     end_key_resp = keyboard.Keyboard()
 
     # Create some handy timers
@@ -260,7 +268,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
     start_trigger.rt = []
     _start_trigger_allKeys = []
     # keep track of which components have finished
-    instructionsComponents = [start_text, start_trigger]
+    instructionsComponents = [title_text, start_text, start_trigger]
     for thisComponent in instructionsComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -283,8 +291,25 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
 
+        # *title_text* updates
+        if title_text.status == NOT_STARTED and tThisFlip >= 0.0 - frameTolerance:
+            # keep track of start time/frame for later
+            title_text.frameNStart = frameN  # exact frame index
+            title_text.tStart = t  # local t and not account for scr refresh
+            title_text.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(title_text, 'tStartRefresh')  # time at next scr refresh
+            title_text.setAutoDraw(True)
+        if title_text.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > title_text.tStartRefresh + 2.0 - frameTolerance:
+                # keep track of stop time/frame for later
+                title_text.tStop = t  # not accounting for scr refresh
+                title_text.frameNStop = frameN  # exact frame index
+                win.timeOnFlip(title_text, 'tStopRefresh')  # time at next scr refresh
+                title_text.setAutoDraw(False)
+
         # *start_text* updates
-        if start_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        if start_text.status == NOT_STARTED and tThisFlip >= 2 - frameTolerance:
             # keep track of start time/frame for later
             start_text.frameNStart = frameN  # exact frame index
             start_text.tStart = t  # local t and not account for scr refresh
@@ -293,7 +318,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
             start_text.setAutoDraw(True)
         if start_text.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > start_text.tStartRefresh + start_text_duration-frameTolerance:
+            if tThisFlipGlobal > start_text.tStartRefresh + start_text_duration - frameTolerance:
                 # keep track of stop time/frame for later
                 start_text.tStop = t  # not accounting for scr refresh
                 start_text.frameNStop = frameN  # exact frame index
@@ -302,7 +327,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
 
         # *start_trigger* updates
         waitOnFlip = False
-        if start_trigger.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        if start_trigger.status == NOT_STARTED and tThisFlip >= 2 - frameTolerance:
             # keep track of start time/frame for later
             start_trigger.frameNStart = frameN  # exact frame index
             start_trigger.tStart = t  # local t and not account for scr refresh
@@ -315,7 +340,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
             win.callOnFlip(start_trigger.clearEvents, eventType='keyboard')  # clear events on next screen flip
         if start_trigger.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > start_trigger.tStartRefresh + start_text_duration-frameTolerance:
+            if tThisFlipGlobal > start_trigger.tStartRefresh + start_text_duration - frameTolerance:
                 # keep track of stop time/frame for later
                 start_trigger.tStop = t  # not accounting for scr refresh
                 start_trigger.frameNStop = frameN  # exact frame index
@@ -351,14 +376,16 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
     for thisComponent in instructionsComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
+    thisExp.addData('title_text.started', title_text.tStartRefresh)
+    thisExp.addData('title_text.stopped', title_text.tStopRefresh)
     # the Routine "instructions" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
 
     # set up handler to look after randomisation of conditions etc
     trials = data.TrialHandler(nReps=1, method='sequential',
-        extraInfo=expInfo, originPath=-1,
-        trialList=data.importConditions(conditions_file),
-        seed=None, name='trials')
+                               extraInfo=expInfo, originPath=-1,
+                               trialList=data.importConditions(conditions_file),
+                               seed=None, name='trials')
     thisExp.addLoop(trials)  # add the loop to the experiment
 
     for thisTrial in trials:
@@ -377,7 +404,8 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
         stim_keyboard.rt = []
         _stim_keyboard_allKeys = []
         # keep track of which components have finished
-        trialComponents = [fixation, background, black_background, regulate_look, stimulus, rating_text, stim_rating, stim_keyboard]
+        trialComponents = [fixation, background, black_background, regulate_look, stimulus, rating_text, stim_rating,
+                           stim_keyboard]
         for thisComponent in trialComponents:
             thisComponent.tStart = None
             thisComponent.tStop = None
@@ -401,7 +429,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
             # update/draw components on each frame
 
             # *fixation* updates
-            if fixation.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            if fixation.status == NOT_STARTED and tThisFlip >= 0.0 - frameTolerance:
                 # keep track of start time/frame for later
                 fixation.frameNStart = frameN  # exact frame index
                 fixation.tStart = t  # local t and not account for scr refresh
@@ -410,7 +438,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                 fixation.setAutoDraw(True)
             if fixation.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > fixation.tStartRefresh + thisTrial['jitter_duration']-frameTolerance:
+                if tThisFlipGlobal > fixation.tStartRefresh + thisTrial['jitter_duration'] - frameTolerance:
                     # keep track of stop time/frame for later
                     fixation.tStop = t  # not accounting for scr refresh
                     fixation.frameNStop = frameN  # exact frame index
@@ -418,7 +446,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                     fixation.setAutoDraw(False)
 
             # *background* updates
-            if background.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration']-frameTolerance:
+            if background.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration'] - frameTolerance:
                 # keep track of start time/frame for later
                 background.frameNStart = frameN  # exact frame index
                 background.tStart = t  # local t and not account for scr refresh
@@ -427,7 +455,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                 background.setAutoDraw(True)
             if background.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > background.tStartRefresh + 11-frameTolerance:
+                if tThisFlipGlobal > background.tStartRefresh + 11 - frameTolerance:
                     # keep track of stop time/frame for later
                     background.tStop = t  # not accounting for scr refresh
                     background.frameNStop = frameN  # exact frame index
@@ -435,7 +463,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                     background.setAutoDraw(False)
 
             # *black_background* updates
-            if black_background.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration']-frameTolerance:
+            if black_background.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration'] - frameTolerance:
                 # keep track of start time/frame for later
                 black_background.frameNStart = frameN  # exact frame index
                 black_background.tStart = t  # local t and not account for scr refresh
@@ -444,7 +472,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                 black_background.setAutoDraw(True)
             if black_background.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > black_background.tStartRefresh + 11-frameTolerance:
+                if tThisFlipGlobal > black_background.tStartRefresh + 11 - frameTolerance:
                     # keep track of stop time/frame for later
                     black_background.tStop = t  # not accounting for scr refresh
                     black_background.frameNStop = frameN  # exact frame index
@@ -452,7 +480,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                     black_background.setAutoDraw(False)
 
             # *regulate_look* updates
-            if regulate_look.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration']-frameTolerance:
+            if regulate_look.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration'] - frameTolerance:
                 # keep track of start time/frame for later
                 regulate_look.frameNStart = frameN  # exact frame index
                 regulate_look.tStart = t  # local t and not account for scr refresh
@@ -461,7 +489,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                 regulate_look.setAutoDraw(True)
             if regulate_look.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > regulate_look.tStartRefresh + 2-frameTolerance:
+                if tThisFlipGlobal > regulate_look.tStartRefresh + 2 - frameTolerance:
                     # keep track of stop time/frame for later
                     regulate_look.tStop = t  # not accounting for scr refresh
                     regulate_look.frameNStop = frameN  # exact frame index
@@ -469,7 +497,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                     regulate_look.setAutoDraw(False)
 
             # *stimulus* updates
-            if stimulus.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration'] + 2-frameTolerance:
+            if stimulus.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration'] + 2 - frameTolerance:
                 # keep track of start time/frame for later
                 stimulus.frameNStart = frameN  # exact frame index
                 stimulus.tStart = t  # local t and not account for scr refresh
@@ -478,7 +506,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                 stimulus.setAutoDraw(True)
             if stimulus.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > stimulus.tStartRefresh + 5.0-frameTolerance:
+                if tThisFlipGlobal > stimulus.tStartRefresh + 5.0 - frameTolerance:
                     # keep track of stop time/frame for later
                     stimulus.tStop = t  # not accounting for scr refresh
                     stimulus.frameNStop = frameN  # exact frame index
@@ -486,7 +514,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                     stimulus.setAutoDraw(False)
 
             # *rating_text* updates
-            if rating_text.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration']+7-frameTolerance:
+            if rating_text.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration'] + 7 - frameTolerance:
                 # keep track of start time/frame for later
                 rating_text.frameNStart = frameN  # exact frame index
                 rating_text.tStart = t  # local t and not account for scr refresh
@@ -495,7 +523,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                 rating_text.setAutoDraw(True)
             if rating_text.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > rating_text.tStartRefresh + 4.0-frameTolerance:
+                if tThisFlipGlobal > rating_text.tStartRefresh + 4.0 - frameTolerance:
                     # keep track of stop time/frame for later
                     rating_text.tStop = t  # not accounting for scr refresh
                     rating_text.frameNStop = frameN  # exact frame index
@@ -508,9 +536,8 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
             # confirm rating by setting to current markerPos
             stim_rating.rating = r
 
-
             # *stim_rating* updates
-            if stim_rating.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration']+7-frameTolerance:
+            if stim_rating.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration'] + 7 - frameTolerance:
                 # keep track of start time/frame for later
                 stim_rating.frameNStart = frameN  # exact frame index
                 stim_rating.tStart = t  # local t and not account for scr refresh
@@ -519,7 +546,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                 stim_rating.setAutoDraw(True)
             if stim_rating.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > stim_rating.tStartRefresh + 4-frameTolerance:
+                if tThisFlipGlobal > stim_rating.tStartRefresh + 4 - frameTolerance:
                     # keep track of stop time/frame for later
                     stim_rating.tStop = t  # not accounting for scr refresh
                     stim_rating.frameNStop = frameN  # exact frame index
@@ -528,7 +555,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
 
             # *stim_keyboard* updates
             waitOnFlip = False
-            if stim_keyboard.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration']+7-frameTolerance:
+            if stim_keyboard.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration'] + 7 - frameTolerance:
                 # keep track of start time/frame for later
                 stim_keyboard.frameNStart = frameN  # exact frame index
                 stim_keyboard.tStart = t  # local t and not account for scr refresh
@@ -541,7 +568,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                 win.callOnFlip(stim_keyboard.clearEvents, eventType='keyboard')  # clear events on next screen flip
             if stim_keyboard.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > stim_keyboard.tStartRefresh + 4-frameTolerance:
+                if tThisFlipGlobal > stim_keyboard.tStartRefresh + 4 - frameTolerance:
                     # keep track of stop time/frame for later
                     stim_keyboard.tStop = t  # not accounting for scr refresh
                     stim_keyboard.frameNStop = frameN  # exact frame index
@@ -588,7 +615,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
         # check responses
         if stim_keyboard.keys in ['', [], None]:  # No response was made
             stim_keyboard.keys = None
-        trials.addData('stim_keyboard.keys',stim_keyboard.keys)
+        trials.addData('stim_keyboard.keys', stim_keyboard.keys)
         if stim_keyboard.keys != None:  # we had a response
             trials.addData('stim_keyboard.rt', stim_keyboard.rt)
         trials.addData('stim_keyboard.started', stim_keyboard.tStartRefresh)
@@ -598,7 +625,6 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
         thisExp.nextEntry()
 
     # completed 1 repeats of 'trials'
-
 
     # ------Prepare to start Routine "end"-------
     continueRoutine = True
@@ -631,7 +657,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
         # update/draw components on each frame
 
         # *end_text* updates
-        if end_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        if end_text.status == NOT_STARTED and tThisFlip >= 0.0 - frameTolerance:
             # keep track of start time/frame for later
             end_text.frameNStart = frameN  # exact frame index
             end_text.tStart = t  # local t and not account for scr refresh
@@ -640,7 +666,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
             end_text.setAutoDraw(True)
         if end_text.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > end_text.tStartRefresh + end_text_duration-frameTolerance:
+            if tThisFlipGlobal > end_text.tStartRefresh + end_text_duration - frameTolerance:
                 # keep track of stop time/frame for later
                 end_text.tStop = t  # not accounting for scr refresh
                 end_text.frameNStop = frameN  # exact frame index
@@ -662,7 +688,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
             win.callOnFlip(end_key_resp.clearEvents, eventType='keyboard')  # clear events on next screen flip
         if end_key_resp.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > end_key_resp.tStartRefresh + asarray(end_text_duration)-frameTolerance:
+            if tThisFlipGlobal > end_key_resp.tStartRefresh + asarray(end_text_duration) - frameTolerance:
                 # keep track of stop time/frame for later
                 end_key_resp.tStop = t  # not accounting for scr refresh
                 end_key_resp.frameNStop = frameN  # exact frame index
@@ -715,7 +741,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
     win.flip()
 
     # these shouldn't be strictly necessary (should auto-save)
-    thisExp.saveAsWideText(filename+'.csv', delim='auto')
+    thisExp.saveAsWideText(filename + '.csv', delim='auto')
     thisExp.saveAsPickle(filename)
     logging.flush()
     # make sure everything is closed down
