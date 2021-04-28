@@ -122,7 +122,7 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
         run_number) + '.csv'
     # session 0 is a practice
     if expInfo['session'] == '0':
-        start_text_str = 'Practice session for ROC task'
+        start_text_str = 'Practice session for the picture task'
         start_text_duration = 20
         conditions_file = 'ROC_Practice.csv'
 
