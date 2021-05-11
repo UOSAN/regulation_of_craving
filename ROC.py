@@ -151,26 +151,26 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
         size=(48, 48),
         ori=0, pos=(0, 0),
         lineWidth=1, colorSpace='rgb', lineColor=[1, 1, 1], fillColor=[1, 1, 1],
-        opacity=1, depth=0.0, interpolate=True)
+        opacity=1, depth=-1.0, interpolate=True)
     background = visual.Rect(
         win=win, name='background', units='pix',
         width=[1.0, 1.0][0], height=[1.0, 1.0][1],
         ori=0, pos=(0, 0),
         lineWidth=1, colorSpace='rgb', lineColor=[1, 1, 1], fillColor='white',
-        opacity=1, depth=-1.0, interpolate=True)
+        opacity=1, depth=-2.0, interpolate=True)
     black_background = visual.Rect(
         win=win, name='black_background', units='pix',
         width=[1.0, 1.0][0], height=[1.0, 1.0][1],
         ori=0, pos=(0, 0),
         lineWidth=1, colorSpace='rgb', lineColor=[1, 1, 1], fillColor=[-1, -1, -1],
-        opacity=1, depth=-2.0, interpolate=True)
+        opacity=1, depth=-3.0, interpolate=True)
     regulate_look = visual.TextStim(win=win, name='regulate_look',
                                     text='',
                                     font='Helvetica',
                                     pos=(0, 0), height=0.075, wrapWidth=None, ori=0,
                                     color='white', colorSpace='rgb', opacity=1,
                                     languageStyle='LTR',
-                                    depth=-3.0);
+                                    depth=-4.0);
     stimulus = visual.ImageStim(
         win=win,
         name='stimulus',
@@ -178,14 +178,14 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
         ori=0, pos=(0, 0), size=None,
         color=[1, 1, 1], colorSpace='rgb', opacity=1,
         flipHoriz=False, flipVert=False,
-        texRes=128, interpolate=True, depth=-4.0)
+        texRes=128, interpolate=True, depth=-5.0)
     rating_text = visual.TextStim(win=win, name='rating_text',
                                   text='How much do you desire the item shown in the last picture?',
                                   font='Helvetica',
                                   pos=(0, 0.1), height=0.075, wrapWidth=None, ori=0,
                                   color='white', colorSpace='rgb', opacity=1,
                                   languageStyle='LTR',
-                                  depth=-5.0);
+                                  depth=-6.0);
     stim_rating = visual.Slider(win=win, name='stim_rating',
                                 size=(1.0, 0.025), pos=(0, -0.2), units=None,
                                 labels=('No Desire', 'Strong Desire'), ticks=(1, 2, 3, 4, 5), granularity=0,
@@ -427,6 +427,12 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
             tThisFlipGlobal = win.getFutureFlipTime(clock=None)
             frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
             # update/draw components on each frame
+            # Update marker position and slider rating
+            # when there are keypresses of the rating buttons
+            r = convert_key_to_rating(stim_keyboard.keys)
+            stim_rating.markerPos = r
+            # confirm rating by setting to current markerPos
+            stim_rating.rating = r
 
             # *fixation* updates
             if fixation.status == NOT_STARTED and tThisFlip >= 0.0 - frameTolerance:
@@ -529,12 +535,6 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
                     rating_text.frameNStop = frameN  # exact frame index
                     win.timeOnFlip(rating_text, 'tStopRefresh')  # time at next scr refresh
                     rating_text.setAutoDraw(False)
-            # Update marker position and slider rating
-            # when there are keypresses of the rating buttons
-            r = convert_key_to_rating(stim_keyboard.keys)
-            stim_rating.markerPos = r
-            # confirm rating by setting to current markerPos
-            stim_rating.rating = r
 
             # *stim_rating* updates
             if stim_rating.status == NOT_STARTED and tThisFlip >= thisTrial['jitter_duration'] + 7 - frameTolerance:
@@ -602,6 +602,11 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
         for thisComponent in trialComponents:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
+        rating_text.tStopRefresh = tThisFlipGlobal
+        stim_rating.tStopRefresh = tThisFlipGlobal
+        stim_keyboard.tStopRefresh = tThisFlipGlobal
+        trials.addData('fixation.started', fixation.tStartRefresh)
+        trials.addData('fixation.stopped', fixation.tStopRefresh)
         trials.addData('regulate_look.started', regulate_look.tStartRefresh)
         trials.addData('regulate_look.stopped', regulate_look.tStopRefresh)
         trials.addData('stimulus.started', stimulus.tStartRefresh)
@@ -609,7 +614,6 @@ def roc(participant_id: str, session: str, run_number: str, is_first: bool):
         trials.addData('rating_text.started', rating_text.tStartRefresh)
         trials.addData('rating_text.stopped', rating_text.tStopRefresh)
         trials.addData('stim_rating.response', stim_rating.getRating())
-        trials.addData('stim_rating.rt', stim_rating.getRT())
         trials.addData('stim_rating.started', stim_rating.tStartRefresh)
         trials.addData('stim_rating.stopped', stim_rating.tStopRefresh)
         # check responses
